@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaign Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1 id="campaign-title">Campaign Dashboard</h1>
+        <p class="subtitle">Read-only campaign view for brand sharing.</p>
+      </header>
+
+      <section class="panel">
+        <h2>Campaign Total</h2>
+        <div id="totals" class="totals"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Post-Level Tracker</h2>
+          <label class="sort-label">
+            Sort by Views
+            <select id="views-sort">
+              <option value="desc">High to Low</option>
+              <option value="asc">Low to High</option>
+            </select>
+          </label>
+        </div>
+        <div class="table-wrap post-table-wrap">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Creator</th>
+                <th>Post</th>
+                <th>Followers</th>
+                <th>Views</th>
+                <th>Likes</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody id="post-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/campaign.js" defer></script>
+  </body>
+</html>

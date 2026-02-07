@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram Reel Campaign Tracker</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Instagram Reel Campaign Tracker</h1>
+        <p class="subtitle">Daily metrics from Apify (saved in database, refreshed every day at 9:00 AM).</p>
+      </header>
+
+      <section class="panel">
+        <h2>Add Post</h2>
+        <form id="add-form">
+          <label>
+            Campaign Name
+            <input name="campaign_name" placeholder="e.g. Redmi Note 15 Launch" required />
+          </label>
+          <label>
+            Creator Handle
+            <input name="creator_handle" placeholder="e.g. @creatorname" required />
+          </label>
+          <label>
+            Instagram Reel/Post URL
+            <input
+              name="post_url"
+              type="url"
+              placeholder="https://www.instagram.com/reel/XXXXXXXXX/"
+              required
+            />
+          </label>
+          <button type="submit">Add & Track</button>
+          <button type="button" id="update-now">Update Now</button>
+          <button type="button" id="delete-all">Delete All</button>
+        </form>
+        <p id="form-message" class="message"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Bulk Add (Paste from Excel)</h2>
+        <form id="bulk-form">
+          <label>
+            Campaign Name
+            <input name="campaign_name" placeholder="e.g. Redmi Note 15 Launch" required />
+          </label>
+          <label>
+            Daily Auto Update
+            <input value="9:00 AM (local time)" disabled />
+          </label>
+          <label class="full-row">
+            Paste Excel Rows (tab-separated)
+            <textarea
+              name="bulk_text"
+              rows="7"
+              placeholder="Name\tProfile Link\tFollowers\tLive Link&#10;Reine\thttps://www.instagram.com/shikhasinghreine/\t102k\thttps://www.instagram.com/reel/DTcibv6EdQw/"
+              required
+            ></textarea>
+          </label>
+          <button type="submit">Bulk Add & Track</button>
+        </form>
+        <p id="bulk-message" class="message"></p>
+      </section>
+
+      <section class="panel">
+        <h2>All Campaigns Total</h2>
+        <div id="totals" class="totals"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Campaign Summary</h2>
+        <div class="table-wrap post-table-wrap">
+          <table class="post-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Campaign</th>
+                <th>Posts</th>
+                <th>Views</th>
+                <th>Likes</th>
+                <th>Comments</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody id="campaign-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Post-Level Tracker</h2>
+          <label class="sort-label">
+            Sort by Views
+            <select id="views-sort">
+              <option value="desc">High to Low</option>
+              <option value="asc">Low to High</option>
+            </select>
+          </label>
+        </div>
+        <p id="last-updated" class="small"></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Campaign</th>
+                <th>Creator</th>
+                <th>Post</th>
+                <th>Followers</th>
+                <th>Views</th>
+                <th>Likes</th>
+                <th>Comments</th>
+                <th>Status</th>
+                <th>Last Snapshot</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="post-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

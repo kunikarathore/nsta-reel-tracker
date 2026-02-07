@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: insta-reel-tracker
+    env: docker
+    plan: starter
+    autoDeploy: true
+    envVars:
+      - key: APIFY_TOKEN
+        sync: false
+      - key: CRON_SECRET
+        sync: false
+      - key: ENABLE_INTERNAL_SCHEDULER
+        value: "0"
+      - key: APIFY_MAX_CONCURRENT_RUNS
+        value: "5"
+      - key: POLL_BATCH_SIZE
+        value: "5"
+      - key: FETCH_RETRY_COUNT
+        value: "2"
+      - key: MANUAL_POLL_ENABLED
+        value: "1"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: insta-reel-tracker-db
+          property: connectionString
+
+  - type: cron
+    name: insta-reel-tracker-daily
+    env: docker
+    schedule: "0 9 * * *"
+    dockerCommand: python scripts/trigger_daily.py
+    envVars:
+      - key: APP_BASE_URL
+        sync: false
+      - key: CRON_SECRET
+        sync: false
+
+databases:
+  - name: insta-reel-tracker-db
+    plan: starter
+    databaseName: insta_reel_tracker
+    user: insta_user
