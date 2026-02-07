@@ -2,7 +2,7 @@ services:
   - type: web
     name: insta-reel-tracker
     env: docker
-    plan: starter
+    plan: free
     autoDeploy: true
     envVars:
       - key: APIFY_TOKEN
@@ -24,19 +24,8 @@ services:
           name: insta-reel-tracker-db
           property: connectionString
 
-  - type: cron
-    name: insta-reel-tracker-daily
-    env: docker
-    schedule: "0 9 * * *"
-    dockerCommand: python scripts/trigger_daily.py
-    envVars:
-      - key: APP_BASE_URL
-        sync: false
-      - key: CRON_SECRET
-        sync: false
-
 databases:
   - name: insta-reel-tracker-db
-    plan: starter
+    plan: free
     databaseName: insta_reel_tracker
     user: insta_user
